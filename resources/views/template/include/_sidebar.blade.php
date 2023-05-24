@@ -56,6 +56,10 @@
                     </ul>
                 </li>
             @endif
+            @if (auth()->user()->role == 'User' )
+            <a href="{{ route('homee') }}">ppppp</a>
+
+            @endif
         </ul>
     </div>
 </div>

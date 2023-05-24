@@ -8,6 +8,8 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class UserController extends Controller
@@ -65,5 +67,25 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('user.index')->with('failed', 'Customer ' . $user->name . ' cannot be deleted! Error Code:' . $e->errorInfo[1]);;
         }
+    }
+    public function register_action(Request $request)
+
+    {
+    $request->validate([
+    'name' => 'required',
+    'email' => 'required|unique:users,email',
+    'password' => 'required',
+    'password_konfirmasi' => 'required|same:password',
+    ]);
+
+    $user = new User([
+    'name' => $request->name,
+    'email' => $request->email,
+    'password' => Hash::make($request->password),
+    'role' => 'user',
+    'random_key' => Str::random(40),
+    ]);
+    $user->save();
+    return redirect()->route('login')->with('success', 'Registration success. Please login!');
     }
 }

@@ -25,10 +25,22 @@
     </svg>
     <div class="container">
         <div class="row vertical-center">
+            @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {!! session('success') !!}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
             <div class="col-lg-5 col-md-8 col-sm-12  mx-auto" style="z-index: 1">
                 <div class="glassmorphism card-signin my-5">
                     <div class="card-body">
                         <div class="row mb-3">
+                            @if (session()->has('failed'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {!! session('failed') !!}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                             <div class="col-lg-12">
                                 <div class="d-flex justify-content-center">
                                     <img src="{{ asset('img/logo/sip.png') }}" width="100" height="100"
@@ -84,7 +96,7 @@
                                 </div>
                             </div>
                             <hr class="my-4">
-                            {{-- <p class="text-center">Doesnt have any account? <a href="/register">register</a></p> --}}
+                            <p class="text-center">Doesnt have any account? <a href="/register">register</a></p>
                         </form>
                     </div>
                 </div>

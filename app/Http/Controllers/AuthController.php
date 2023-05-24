@@ -10,8 +10,10 @@ class AuthController extends Controller
 {
     public function postLogin(PostLoginRequest $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('email', 'password')) && auth()->user()->role != 'User') {
             return redirect('dashboard')->with('success', 'Welcome ' . auth()->user()->name);
+        }else{
+            return redirect('homee')->with('success', 'Welcome ' . auth()->user()->name);
         }
         return redirect('login')->with('failed', 'Incorrect email / password');
     }

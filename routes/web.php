@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/mark-all-as-read', [NotificationsController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
+    // Route::view('/homee', 'home.index')->name('homee');
 
     Route::get('/notification-to/{id}',[NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
@@ -98,4 +99,12 @@ Route::get('/sendEvent', function () {
         $message = 'Reservation added by';
         // event(new NewReservationEvent($message, $superAdmin));
     }
+});
+route::view('/register','auth.register')->name('register');
+Route::post('/register', [UserController::class, 'register_action'])->name('register.action');
+Route::group(['middleware' => ['auth', 'checkRole:User']], function () {
+
+
+
+    Route::view('/homee', 'home.index')->name('homee');
 });

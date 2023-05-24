@@ -27,9 +27,15 @@
                                 <h5 class="card-title text-center">Sistem Informasi Perusahaan</h5>
                             </div>
                         </div>
-                        <form class="form-signin" action="http://localhost:81/sip/pelamar/fungsi_daftar" method="post">
+                        <form class="form-signin"action="{{ route('register.action') }}"method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-lg-12">
+                                    <div class="form-label-group">
+                                        <input type="name" id="name" name="name"
+                                            class="form-control" placeholder="Name" value="" required>
+                                        <label for="name">Name</label>
+                                    </div>
                                     <div class="form-label-group">
                                         <input type="email" id="email" name="email" class="form-control" placeholder="Email"
                                             value="" required autofocus>
